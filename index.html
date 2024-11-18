@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flip Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+      min-height: 100vh;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* 가로 3칸 */
+      grid-template-rows: repeat(4, 1fr);   /* 세로 4줄 */
+      gap: 16px; /* 카드 간격 */
+      padding: 20px;
+    }
+
+    .card {
+      width: 150px;
+      height: 200px;
+      perspective: 1000px;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 8px;
+    }
+
+    .card-front {
+      background-size: cover;
+      background-position: center;
+      background-color: #ccc;
+      border: 1px solid #aaa;
+    }
+
+    .card-back {
+      background-color: #007BFF;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transform: rotateY(180deg);
+      border: 1px solid #0056b3;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1000;
+      background-size: cover;
+      background-position: center;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: none;
+    }
+
+    .fullscreen .card-front {
+      display: none; /* 전체화면에서는 앞면 숨기기 */
+    }
+
+    .fullscreen .card-back {
+      transform: none;
+      background-size: cover; /* 전체화면 상태에서 이미지가 꽉 차게 */
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-grid">
+    <!-- 12개의 카드 (가로 3, 세로 4) -->
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./002.jpg');">Card 1</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./003.jpg');"></div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./004.jpg');">Card 3</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./005.jpg');">Card 4</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./006.jpg');">Card 5</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./007.jpg');">Card 6</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./008.jpg');">Card 7</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./009.jpg');">Card 8</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./010.jpg');">Card 9</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./011.jpg');">Card 10</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./012.jpg');">Card 11</div>
+      </div>
+    </div>
+    <div class="card" onclick="toggleFullscreen(this)">
+      <div class="card-inner">
+        <div class="card-front" style="background-image: url('./001.jpg');"></div>
+        <div class="card-back" style="background-image: url('./013.jpg');">Card 12</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleFullscreen(cardElement) {
+      if (cardElement.classList.contains('fullscreen')) {
+        cardElement.classList.remove('fullscreen');
+      } else {
+        document.querySelectorAll('.card').forEach(card => card.classList.remove('fullscreen'));
+        cardElement.classList.add('fullscreen');
+      }
+    }
+  </script>
+
+</body>
+</html>
